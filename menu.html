@@ -7,7 +7,9 @@
   <meta name="description" content="Página de catálogo da loja Fashion Store consumindo Platzi Fake API.">
   <title>Fashion Store - Catálogo</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
   <script>
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
@@ -20,7 +22,8 @@
     <nav style="align-items: center;">
       <a href="index.html" id="nav-home">Início</a>
       <a href="menu.html" class="active" id="nav-menu">Catálogo</a>
-      <button id="theme-toggle" class="btn-theme" aria-label="Alternar Tema" onclick="if(typeof toggleTheme==='function') toggleTheme()">🌓</button>
+      <button id="theme-toggle" class="btn-theme" aria-label="Alternar Tema"
+        onclick="if(typeof toggleTheme==='function') toggleTheme()">🌓</button>
     </nav>
   </header>
   <main class="page-content">
@@ -28,9 +31,9 @@
       <div class="section-header">
         <h2>Nosso Catálogo Completo</h2>
         <div class="filters">
-          <select id="category-filter" aria-label="Filtrar por Categoria" onchange="if(typeof filterProducts==='function') filterProducts(this.value)">
+          <select id="category-filter" aria-label="Filtrar por Categoria"
+            onchange="if(typeof filterProducts==='function') filterProducts(this.value)">
             <option value="">Todas as Categorias</option>
-            <!-- Options injected by app.js -->
           </select>
         </div>
       </div>
@@ -54,6 +57,7 @@
   <footer>
     <p>&copy; 2026 Avaliação Prática - Fashion Store (Powered by Platzi Fake Store API)</p>
   </footer>
+  <script src="app.js"></script>
 </body>
 
 </html>
