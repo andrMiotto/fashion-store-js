@@ -81,7 +81,7 @@ function renderProducts(productsList, containerId) {
               <h3 class="card-title">${product.title}</h3>
               <div class="card-footer">
                 <span class="card-price">R$ ${product.price}</span>
-                <a href="details.html?id=${product.id}" class="btn-primary btn-small">Ver Detalhes</a>
+                <a href="detail.html?id=${product.id}" class="btn-primary btn-small">Ver Detalhes</a>
               </div>
             </div>
         </article>`;
@@ -106,9 +106,47 @@ async function loadCategories() {
 }
 
 
-const categoryElement = document.getElementById("category-filter");
+
+
+async function loadDetails() {
+
+    try {
+        const urlDetails = new URLSearchParams(window.location.search);
+        const id = urlDetails.get('id');
+
+
+        const response = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`)
+        const item = await response.json();
+
+
+        const container = document.getElementById('product-detail');
+
+
+
+        container.innerHTML = `
+    <img src="${item.images[0]}" alt="${item.title}" class="detail-img" onerror="this.src='https://placehold.co/600x400'">
+    <div class="detail-info">
+      <span class="card-category" style="font-size:1rem; margin-bottom:1rem; display:block;">Categoria: ${item.category.name}</span>
+      <h1>${item.title}</h1>
+      <div class="detail-price">R$ ${item.price}</div>
+      <p class="detail-description">${item.description}</p>
+      <button class="btn-primary">Adicionar ao Carrinho</button>
+    </div>
+    `;
+
+
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
+
+
 const containerHome = document.getElementById("featured-list");
 const containerMenu = document.getElementById("products-list");
+const containerDetail = document.getElementById('product-detail');
+const categoryElement = document.getElementById("category-filter");
 
 if (containerHome && !containerMenu) {
     loadProductsHome();
@@ -117,14 +155,15 @@ if (containerHome && !containerMenu) {
 if (containerMenu) {
     loadProductsCatalog();
     loadCategories();
+
     if (categoryElement) {
-
         categoryElement.addEventListener('change', (event) => {
-
             const idSelecionado = event.target.value;
             loadProductsCatalog(idSelecionado);
-
         });
     }
 }
 
+if (containerDetail) {
+    loadDetails();
+}
